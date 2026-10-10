@@ -773,4 +773,35 @@
                 event => {
 
                     if (
-                   
+   document.addEventListener("DOMContentLoaded", function () {
+
+    const button = document.createElement("button");
+
+    button.id = "calcos-ai-launcher";
+    button.innerHTML = "✦ CALCOS AI";
+
+    button.onclick = function () {
+        if (window.openCalcosAI) {
+            window.openCalcosAI();
+        }
+    };
+
+    Object.assign(button.style, {
+        position: "fixed",
+        right: "18px",
+        bottom: "18px",
+        zIndex: "99998",
+        padding: "14px 18px",
+        border: "0",
+        borderRadius: "16px",
+        background: "linear-gradient(135deg,#ff4d00,#ff7200)",
+        color: "#fff",
+        fontSize: "14px",
+        fontWeight: "900",
+        boxShadow: "0 10px 30px rgba(0,0,0,.45)",
+        cursor: "pointer"
+    });
+
+    document.body.appendChild(button);
+
+});                
