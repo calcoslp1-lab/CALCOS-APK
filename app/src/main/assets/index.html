@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>CALCOS LP AUTO</title>
+
+<style>
+:root{
+    --bg:#08090b;
+    --panel:#101216;
+    --panel2:#15181d;
+    --panel3:#1b1f25;
+    --line:#292e36;
+    --text:#f5f7fa;
+    --muted:#8d949e;
+    --accent:#ff4d00;
+    --accent2:#ff6a2a;
+    --green:#36d17c;
+    --danger:#ff4141;
+    --shadow:0 14px 40px rgba(0,0,0,.38);
+    --radius:18px;
+}
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+button,input{
+    font:inherit;
+}
+
+button{
+    border:0;
+    color:inherit;
+}
+
+.app{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+}
+
+/* TOP BAR */
+
+.topbar{
+    height:68px;
+    min-height:68px;
+    background:rgba(8,9,11,.96);
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 16px;
+    z-index:20;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.logo{
+    width:40px;
+    height:40px;
+    border:2px solid var(--accent);
+    border-radius:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    font-size:13px;
+    letter-spacing:-1px;
+    background:#0d0f12;
+    box-shadow:0 0 20px rgba(255,77,0,.12);
+}
+
+.brandText{
+    line-height:1;
+}
+
+.brandName{
+    font-size:15px;
+    font-weight:900;
+    letter-spacing:.5px;
+}
+
+.brandSub{
+    margin-top:5px;
+    font-size:9px;
+    color:var(--muted);
+    letter-spacing:2px;
+    font-weight:700;
+}
+
+.topActions{
+    display:flex;
+    gap:8px;
+}
+
+.iconBtn{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    background:var(--panel2);
+    border:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    cursor:pointer;
+}
+
+.iconBtn:active{
+    transform:scale(.94);
+}
+
+/* CONTENT */
+
+.content{
+    flex:1;
+    min-height:0;
+    position:relative;
+}
+
+.view{
+    display:none;
+    width:100%;
+    height:100%;
+}
+
+.view.active{
+    display:flex;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+    flex-direction:column;
+    overflow:auto;
+    padding:18px;
+    padding-bottom:100px;
+}
+
+.hero{
+    padding:22px;
+    border-radius:22px;
+    background:
+        radial-gradient(circle at 90% 10%,rgba(255,77,0,.22),transparent 35%),
+        linear-gradient(145deg,#171a20,#0e1014);
+    border:1px solid #292e36;
+    box-shadow:var(--shadow);
+}
+
+.heroSmall{
+    color:var(--accent2);
+    font-size:10px;
+    letter-spacing:2px;
+    font-weight:800;
+}
+
+.hero h1{
+    margin:8px 0 5px;
+    font-size:29px;
+    line-height:1;
+}
+
+.hero p{
+    margin:0;
+    color:var(--muted);
+    font-size:13px;
+}
+
+.primary{
+    margin-top:20px;
+    width:100%;
+    height:52px;
+    border-radius:15px;
+    background:linear-gradient(135deg,var(--accent),#ff702e);
+    color:white;
+    font-weight:900;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(255,77,0,.22);
+}
+
+.primary:active{
+    transform:scale(.98);
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-top:14px;
+}
+
+.stat{
+    padding:16px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:var(--panel);
+}
+
+.statLabel{
+    color:var(--muted);
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.statValue{
+    margin-top:7px;
+    font-size:22px;
+    font-weight:900;
+}
+
+.sectionTitle{
+    margin:24px 2px 11px;
+    font-size:13px;
+    font-weight:900;
+    letter-spacing:.6px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.card{
+    min-height:105px;
+    padding:16px;
+    border-radius:17px;
+    border:1px solid var(--line);
+    background:var(--panel);
+    cursor:pointer;
+}
+
+.card:active{
+    transform:scale(.98);
+}
+
+.cardIcon{
+    font-size:25px;
+}
+
+.cardTitle{
+    margin-top:11px;
+    font-weight:800;
+    font-size:13px;
+}
+
+.cardDesc{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:10px;
+}
+
+/* EDITOR */
+
+.editor{
+    flex-direction:column;
+}
+
+.editorToolbar{
+    min-height:54px;
+    background:var(--panel);
+    border-bottom:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:7px;
+    overflow-x:auto;
+}
+
+.tool{
+    flex:0 0 auto;
+    min-width:44px;
+    height:40px;
+    padding:0 11px;
+    border-radius:11px;
+    background:var(--panel2);
+    border:1px solid var(--line);
+    color:var(--text);
+    font-size:11px;
+    font-weight:800;
+}
+
+.tool.active{
+    background:rgba(255,77,0,.14);
+    border-color:rgba(255,77,0,.65);
+    color:#ff7740;
+}
+
+.editorBody{
+    flex:1;
+    min-height:0;
+    position:relative;
+    background:
+        linear-gradient(#101318 1px,transparent 1px),
+        linear-gradient(90deg,#101318 1px,transparent 1px);
+    background-size:24px 24px;
+    overflow:hidden;
+}
+
+#canvas{
+    width:100%;
+    height:100%;
+    display:block;
+    touch-action:none;
+}
+
+.emptyEditor{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events:none;
+}
+
+.emptyBox{
+    text-align:center;
+    max-width:270px;
+}
+
+.emptyLogo{
+    width:62px;
+    height:62px;
+    border:2px solid var(--accent);
+    border-radius:17px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:900;
+    font-size:19px;
+}
+
+.emptyBox h2{
+    margin:16px 0 6px;
+    font-size:19px;
+}
+
+.emptyBox p{
+    margin:0;
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.5;
+}
+
+.bottomTools{
+    min-height:70px;
+    background:rgba(12,14,18,.98);
+    border-top:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:9px;
+    overflow-x:auto;
+}
+
+.bottomTool{
+    min-width:68px;
+    height:51px;
+    border-radius:13px;
+    background:var(--panel2);
+    border:1px solid var(--line);
+    font-size:10px;
+    font-weight:800;
+}
+
+.bottomTool strong{
+    display:block;
+    font-size:17px;
+    margin-bottom:2px;
+}
+
+/* PROPERTIES */
+
+.properties{
+    position:absolute;
+    left:10px;
+    right:10px;
+    bottom:78px;
+    background:rgba(17,19,24,.98);
+    border:1px solid var(--line);
+    border-radius:19px;
+    padding:13px;
+    box-shadow:var(--shadow);
+    display:none;
+    z-index:10;
+}
+
+.properties.show{
+    display:block;
+}
+
+.propHeader{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:10px;
+}
+
+.propTitle{
+    font-size:12px;
+    font-weight:900;
+}
+
+.close{
+    width:30px;
+    height:30px;
+    border-radius:9px;
+    background:var(--panel3);
+}
+
+.propGrid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:8px;
+}
+
+.field label{
+    display:block;
+    color:var(--muted);
+    font-size:9px;
+    margin-bottom:4px;
+}
+
+.field input{
+    width:100%;
+    height:36px;
+    background:#0b0d10;
+    color:white;
+    border:1px solid var(--line);
+    border-radius:9px;
+    padding:0 9px;
+    outline:none;
+}
+
+.field input:focus{
+    border-color:var(--accent);
+}
+
+.propActions{
+    display:flex;
+    gap:7px;
+    margin-top:9px;
+}
+
+.smallBtn{
+    flex:1;
+    height:38px;
+    border-radius:10px;
+    background:var(--panel3);
+    border:1px solid var(--line);
+    font-size:10px;
+    font-weight:800;
+}
+
+.smallBtn.danger{
+    color:#ff6868;
+}
+
+/* LIBRARY / PROJECTS */
+
+.listView{
+    flex-direction:column;
+    overflow:auto;
+    padding:17px;
+    padding-bottom:100px;
+}
+
+.pageHeader h2{
+    margin:0;
+    font-size:24px;
+}
+
+.pageHeader p{
+    margin:6px 0 18px;
+    color:var(--muted);
+    font-size:12px;
+}
+
+.categoryGrid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.category{
+    min-height:90px;
+    padding:15px;
+    border-radius:16px;
+    background:var(--panel);
+    border:1px solid var(--line);
+}
+
+.category b{
+    font-size:13px;
+}
+
+.category span{
+    display:block;
+    margin-top:7px;
+    color:var(--muted);
+    font-size:10px;
+}
+
+.project{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:13px;
+    border-radius:14px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    margin-bottom:8px;
+}
+
+.projectIcon{
+    width:43px;
+    height:43px;
+    border-radius:11px;
+    background:var(--panel3);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.projectInfo{
+    flex:1;
+}
+
+.projectName{
+    font-size:12px;
+    font-weight:800;
+}
+
+.projectDate{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:9px;
+}
+
+/* SETTINGS */
+
+.settings{
+    flex-direction:column;
+    overflow:auto;
+    padding:17px;
+    padding-bottom:100px;
+}
+
+.settingGroup{
+    margin-top:18px;
+}
+
+.settingGroup h3{
+    margin:0 0 8px;
+    font-size:11px;
+    color:var(--accent2);
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.setting{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:14px;
+    border:1px solid var(--line);
+    background:var(--panel);
+    border-radius:13px;
+    margin-bottom:7px;
+}
+
+.settingInfo{
+    flex:1;
+}
+
+.settingName{
+    font-size:12px;
+    font-weight:800;
+}
+
+.settingDesc{
+    margin-top:4px;
+    color:var(--muted);
+    font-size:9px;
+}
+
+.setting input{
+    width:90px;
+    height:37px;
+    background:#0a0c0f;
+    color:white;
+    border:1px solid var(--line);
+    border-radius:9px;
+    text-align:center;
+    outline:none;
+}
+
+/* NAV */
+
+.nav{
+    height:68px;
+    min-height:68px;
+    background:#0b0d10;
+    border-top:1px solid var(--line);
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    z-index:30;
+}
+
+.navItem{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    color:#707780;
+    font-size:9px;
+    font-weight:800;
+}
+
+.navIcon{
+    font-size:19px;
+}
+
+.navItem.active{
+    color:white;
+}
+
+.navItem.active .navIcon{
+    color:var(--accent);
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:84px;
+    transform:translateX(-50%) translateY(20px);
+    background:#20242b;
+    border:1px solid #343a43;
+    color:white;
+    padding:11px 15px;
+    border-radius:12px;
+    font-size:11px;
+    font-weight:700;
+    opacity:0;
+    pointer-events:none;
+    transition:.25s;
+    z-index:100;
+    white-space:nowrap;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+/* RESPONSIVE */
+
+@media(min-width:700px){
+    .dashboard,
+    .listView,
+    .settings{
+        max-width:1000px;
+        width:100%;
+        margin:auto;
+    }
+
+    .stats{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .cards{
+        grid-template-columns:repeat(4,1fr);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="topbar">
+    <div class="brand">
+        <div class="logo">LP</div>
+        <div class="brandText">
+            <div class="brandName">CALCOS LP</div>
+            <div class="brandSub">AUTO • PROFESSIONAL</div>
+        </div>
+    </div>
+
+    <div class="topActions">
+        <button class="iconBtn" onclick="newProject()">＋</button>
+        <button class="iconBtn" onclick="showToast('Guardado automático activo')">✓</button>
+    </div>
+</header>
+
+<main class="content">
+
+<!-- DASHBOARD -->
+
+<section id="dashboard" class="view dashboard active">
+
+    <div class="hero">
+        <div class="heroSmall">STICKER PRODUCTION SYSTEM</div>
+        <h1>CALCOS LP AUTO</h1>
+        <p>Diseño, corte y optimización profesional.</p>
+
+        <button class="primary" onclick="newProject()">
+            ＋ NUEVA PLANCHA
+        </button>
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <div class="statLabel">Proyectos</div>
+            <div class="statValue" id="statProjects">0</div>
+        </div>
+
+        <div class="stat">
+            <div class="statLabel">Diseños</div>
+            <div class="statValue" id="statDesigns">0</div>
+        </div>
+
+        <div class="stat">
+            <div class="statLabel">Plancha</div>
+            <div class="statValue">1m²</div>
+        </div>
+
+        <div class="stat">
+            <div class="statLabel">Motor</div>
+            <div class="statValue">AUTO</div>
+        </div>
+    </div>
+
+    <div class="sectionTitle">HERRAMIENTAS</div>
+
+    <div class="cards">
+
+        <div class="card" onclick="newProject()">
+            <div class="cardIcon">▦</div>
+            <div class="cardTitle">Nueva plancha</div>
+            <div class="cardDesc">Crear producción</div>
+        </div>
+
+        <div class="card" onclick="go('library')">
+            <div class="cardIcon">◫</div>
+            <div class="cardTitle">Biblioteca</div>
+            <div class="cardDesc">Tus diseños</div>
+        </div>
+
+        <div class="card" onclick="go('projects')">
+            <div class="cardIcon">▣</div>
+            <div class="cardTitle">Proyectos</div>
+            <div class="cardDesc">Trabajos guardados</div>
+        </div>
+
+        <div class="card" onclick="go('settings')">
+            <div class="cardIcon">⚙</div>
+            <div class="cardTitle">Configuración</div>
+            <div class="cardDesc">Producción</div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- EDITOR -->
+
+<section id="editor" class="view editor">
+
+    <div class="editorToolbar">
+
+        <button class="tool" onclick="openFile()">＋ PNG</button>
+
+        <button class="tool" onclick="duplicateSelected()">DUPLICAR</button>
+
+        <button class="tool" onclick="rotateSelected(-90)">↶</button>
+
+        <button class="tool" onclick="rotateSelected(90)">↷</button>
+
+        <button class="tool" onclick="generateCutForSelected()">✂ CORTE</button>
+
+        <button class="tool" onclick="optimize()">⚡ OPTIMIZAR</button>
+
+        <button class="tool" onclick="exportSVG()">SVG</button>
+
+    </div>
+
+    <div class="editorBody">
+
+        <canvas id="canvas"></canvas>
+
+        <div class="emptyEditor" id="emptyEditor">
+            <div class="emptyBox">
+                <div class="emptyLogo">LP</div>
+                <h2>Plancha vacía</h2>
+                <p>
+                    Importá tus PNG transparentes para comenzar
+                    a preparar la producción.
+                </p>
+            </div>
+        </div>
+
+        <div class="properties" id="properties">
+
+            <div class="propHeader">
+                <div class="propTitle">PROPIEDADES DEL DISEÑO</div>
+                <button class="close" onclick="deselect()">×</button>
+            </div>
+
+            <div class="propGrid">
+
+                <div class="field">
+                    <label>ANCHO mm</label>
+                    <input id="propW" type="number" step="0.1"
+                           onchange="updateSelectedProperty('w',this.value)">
+                </div>
+
+                <div class="field">
+                    <label>ALTO mm</label>
+                    <input id="propH" type="number" step="0.1"
+                           onchange="updateSelectedProperty('h',this.value)">
+                </div>
+
+                <div class="field">
+                    <label>X mm</label>
+                    <input id="propX" type="number" step="0.1"
+                           onchange="updateSelectedProperty('x',this.value)">
+                </div>
+
+                <div class="field">
+                    <label>Y mm</label>
+                    <input id="propY" type="number" step="0.1"
+                           onchange="updateSelectedProperty('y',this.value)">
+                </div>
+
+                <div class="field">
+                    <label>ROTACIÓN °</label>
+                    <input id="propR" type="number" step="1"
+                           onchange="updateSelectedProperty('rotation',this.value)">
+                </div>
+
+                <div class="field">
+                    <label>CORTE mm</label>
+                    <input id="propOffset" type="number" step="0.1"
+                           onchange="updateSelectedProperty('offset',this.value)">
+                </div>
+
+            </div>
+
+            <div class="propActions">
+                <button class="smallBtn" onclick="mirrorSelected()">↔ ESPEJAR</button>
+                <button class="smallBtn" onclick="generateCutForSelected()">GENERAR CORTE</button>
+                <button class="smallBtn danger" onclick="deleteSelected()">ELIMINAR</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="bottomTools">
+
+        <button class="bottomTool" onclick="fitSheet()">
+            <strong>⌗</strong>
+            PLANCHA
+        </button>
+
+        <button class="bottomTool" onclick="zoomCanvas(1.2)">
+            <strong>＋</strong>
+            ZOOM
+        </button>
+
+        <button class="bottomTool" onclick="zoomCanvas(.8)">
+            <strong>−</strong>
+            ALEJAR
+        </button>
+
+        <button class="bottomTool" onclick="toggleCutView()">
+            <strong>✂</strong>
+            CORTE
+        </button>
+
+        <button class="bottomTool" onclick="saveProject()">
+            <strong>✓</strong>
+            GUARDAR
+        </button>
+
+    </div>
+
+</section>
+
+<!-- LIBRARY -->
+
+<section id="library" class="view listView">
+
+    <div class="pageHeader">
+        <h2>Biblioteca</h2>
+        <p>Organizá tus diseños por categorías.</p>
+    </div>
+
+    <div class="categoryGrid">
+
+        <div class="category">
+            <b>🎮 Gamer</b>
+            <span id="catGamer">0 diseños</span>
+        </div>
+
+        <div class="category">
+            <b>🏎 Tuning</b>
+            <span id="catTuning">0 diseños</span>
+        </div>
+
+        <div class="category">
+            <b>⚽ Fútbol</b>
+            <span id="catFutbol">0 diseños</span>
+        </div>
+
+        <div class="category">
+            <b>🔥 Barrial</b>
+            <span id="catBarrial">0 diseños</span>
+        </div>
+
+        <div class="category">
+            <b>🖥 PC</b>
+            <span>0 diseños</span>
+        </div>
+
+        <div class="category">
+            <b>🎧 Audio</b>
+            <span>0 diseños</span>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PROJECTS -->
+
+<section id="projects" class="view listView">
+
+    <div class="pageHeader">
+        <h2>Proyectos</h2>
+        <p>Trabajos guardados en este dispositivo.</p>
+    </div>
+
+    <div id="projectList"></div>
+
+</section>
+
+<!-- SETTINGS -->
+
+<section id="settings" class="view settings">
+
+    <div class="pageHeader">
+        <h2>Configuración</h2>
+        <p>Parámetros de producción de CALCOS LP AUTO.</p>
+    </div>
+
+    <div class="settingGroup">
+
+        <h3>PLANCHA</h3>
+
+        <div class="setting">
+            <div class="settingInfo">
+                <div class="settingName">Ancho</div>
+                <div class="settingDesc">Ancho de material en milímetros.</div>
+            </div>
+            <input id="sheetW" type="number" value="1000"
+                   onchange="updateSheetSettings()">
+        </div>
+
+        <div class="setting">
+            <div class="settingInfo">
+                <div class="settingName">Alto</div>
+                <div class="settingDesc">Alto de material en milímetros.</div>
+            </div>
+            <input id="sheetH" type="number" value="500"
+                   onchange="updateSheetSettings()">
+        </div>
+
+    </div>
+
+    <div class="settingGroup">
+
+        <h3>CORTE</h3>
+
+        <div class="setting">
+            <div class="settingInfo">
+                <div class="settingName">Separación</div>
+                <div class="settingDesc">Espacio mínimo entre diseños.</div>
+            </div>
+            <input id="separation" type="number" value="3"
+                   onchange="settings.separation=numberValue(this,3)">
+        </div>
+
+        <div class="setting">
+            <div class="settingInfo">
+                <div class="settingName">Margen de corte</div>
+                <div class="settingDesc">Expansión alrededor del diseñ
